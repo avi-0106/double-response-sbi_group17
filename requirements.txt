@@ -1,0 +1,8 @@
+bayesflow==2.0.10
+keras==3.15.0
+jax==0.10.2
+numpy==2.4.6
+pandas==3.0.3
+scipy==1.18.0
+matplotlib==3.11.0
+jupyterlab==4.5.1
