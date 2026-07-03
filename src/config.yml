@@ -1,0 +1,29 @@
+seed: 2026
+
+simulation:
+  n_trials_per_subject: 1000
+  max_t: 3.0
+  dt: 0.02
+
+priors:
+  nu:
+    distribution: gamma
+    shape: 5
+    scale: 0.5      # drift rates, avg around 2.5
+
+  alpha1:
+    distribution: gamma
+    shape: 5
+    scale: 0.2      # first threshold, avg around 1.0
+
+  alpha2_gap:
+    distribution: exponential
+    scale: 5.0      # how much higher the 2nd threshold is, need to tune this once we can test it
+
+  tau:
+    distribution: exponential
+    scale: 0.15     # non-decision time, avg 0.15s
+
+paths:
+  data_dir: ../data
+  results_dir: ../results
