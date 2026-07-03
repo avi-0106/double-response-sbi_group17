@@ -5,6 +5,8 @@
 1. Make sure Docker Desktop is installed and running.
 2. From the repo root:
 ```bash
+   Set-Content -Path ..\.env -Value "KERAS_BACKEND=jax"
+   cd ..
    cd docker
    docker compose up --build
 ```
