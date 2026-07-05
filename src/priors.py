@@ -32,8 +32,11 @@ def prior():
         scale=priors_cfg["alpha1"]["scale"],
     )
 
-    # alpha2 is always alpha1 plus some positive gap, so it can never end up lower
-    gap = rng.exponential(scale=priors_cfg["alpha2_gap"]["scale"])
+    # gap is scaled by drift speed, not a flat distance, so fast and slow
+    # participants both get a proportionally sized second threshold
+    extra_time = rng.exponential(scale=priors_cfg["alpha2_gap"]["scale"])
+    loser_speed = np.mean(nu)
+    gap = extra_time * loser_speed
     alpha2 = alpha1 + gap
 
     tau = rng.exponential(scale=priors_cfg["tau"]["scale"])
