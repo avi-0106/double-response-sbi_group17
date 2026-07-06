@@ -32,9 +32,11 @@ def prior():
         scale=priors_cfg["alpha1"]["scale"],
     )
 
-    # gap is scaled by drift speed, not a flat distance, so fast and slow
-    # participants both get a proportionally sized second threshold
-    extra_time = rng.exponential(scale=priors_cfg["alpha2_gap"]["scale"])
+    # gamma (not exponential) keeps extra_time from swinging too wildly between people,
+    # while still scaling by drift speed so fast/slow participants both get a fair gap
+    time_scale = priors_cfg["alpha2_gap"]["time_scale"]
+    time_shape = priors_cfg["alpha2_gap"]["time_shape"]
+    extra_time = rng.gamma(shape=time_shape, scale=time_scale / time_shape)
     loser_speed = np.mean(nu)
     gap = extra_time * loser_speed
     alpha2 = alpha1 + gap

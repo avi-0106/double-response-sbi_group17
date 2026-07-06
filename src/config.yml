@@ -15,8 +15,9 @@ priors:
     shape: 5
     scale: 0.2      # first threshold, avg around 1.0
   alpha2_gap:
-    distribution: exponential
-    scale: 10.0     # this is now a TIME scale, not a raw distance
+    distribution: gamma
+    time_scale: 6.0
+    time_shape: 5
   tau:
     distribution: exponential
     scale: 0.15     # non-decision time, avg 0.15s
