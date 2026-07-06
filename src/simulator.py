@@ -19,6 +19,9 @@ N_TRIALS = sim_cfg["n_trials_per_subject"]
 
 rng = np.random.default_rng(config["seed"])
 
+def context():
+    """Fixed setting shared by every simulated person: trial count."""
+    return {"n": N_TRIALS}
 
 def race_to_threshold(drift, threshold, n, max_t=MAX_T, dt=DT):
     """
