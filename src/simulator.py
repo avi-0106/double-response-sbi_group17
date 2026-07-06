@@ -1,9 +1,8 @@
 """
-Simulator for the two-threshold RDM.
+Simulator for the two-threshold RDM (vectorized version).
 
-Given one parameter set from prior(), generates a batch of
-simulated trials: first-response time, correctness, whether a
-double response occurred, and the second-response time.
+Instead of looping one trial at a time, this runs ALL trials for a
+person simultaneously using numpy arrays - much faster.
 """
 
 import numpy as np
@@ -21,64 +20,46 @@ N_TRIALS = sim_cfg["n_trials_per_subject"]
 rng = np.random.default_rng(config["seed"])
 
 
-def first_passage_time(drift, threshold, max_t=MAX_T, dt=DT):
+def race_to_threshold(drift, threshold, n, max_t=MAX_T, dt=DT):
     """
-    Simulate one accumulator racing toward a threshold, step by step.
-    Returns the time it crosses the threshold, or max_t if it never does.
+    Race n trials at once toward a threshold.
+    drift can be one number (same for all trials) or an array (different per trial).
+    Returns an array of n crossing times.
     """
-    evidence = 0.0
-    t = 0.0
     n_steps = int(max_t / dt)
+    sqrt_dt = np.sqrt(dt)
 
-    for _ in range(n_steps):
-        t += dt
-        # forward push from the drift, plus random noise each step
-        evidence += drift * dt + rng.normal(scale=np.sqrt(dt))
-        if evidence >= threshold:
-            return t
+    drift_arr = np.full(n, drift) if np.isscalar(drift) else drift
+    evidence = np.zeros(n)
+    crossed = np.zeros(n, dtype=bool)
+    crossing_time = np.full(n, max_t)
 
-    return max_t
+    for step in range(1, n_steps + 1):
+        t = step * dt
+        noise = rng.normal(scale=sqrt_dt, size=n)
+        evidence += drift_arr * dt + noise
 
+        newly_crossed = (~crossed) & (evidence >= threshold)
+        crossing_time[newly_crossed] = t
+        crossed |= newly_crossed
 
-def trial(nu, alpha1, alpha2, tau):
-    """
-    Simulate one full trial: both accumulators race to alpha1,
-    then the loser keeps racing to alpha2.
-    """
-    t0 = first_passage_time(nu[0], alpha1)
-    t1 = first_passage_time(nu[1], alpha1)
+        if crossed.all():
+            break
 
-    if t0 < t1:
-        first_response_time = t0 + tau
-        correct = 0.0  # accumulator 0 won
-        loser_drift = nu[1]
-    else:
-        first_response_time = t1 + tau
-        correct = 1.0  # accumulator 1 won
-        loser_drift = nu[0]
+    return crossing_time
 
-    t2 = first_passage_time(loser_drift, alpha2)
-    double_flag = 1.0 if t2 < MAX_T else 0.0
-    second_response_time = (t2 + tau) if double_flag == 1.0 else 0.0
-
-    return first_response_time, correct, double_flag, second_response_time
 
 def simulate_dataset(nu, alpha1, alpha2, tau, n=N_TRIALS):
-    """
-    Run n independent trials for one parameter set.
-    Returns arrays matching what a real participant's data would look like.
-    """
-    first_response_time = np.zeros(n)
-    correct = np.zeros(n)
-    double_flag = np.zeros(n)
-    second_response_time = np.zeros(n)
+    t0 = race_to_threshold(nu[0], alpha1, n)
+    t1 = race_to_threshold(nu[1], alpha1, n)
 
-    for i in range(n):
-        rt1, corr, dbl, rt2 = trial(nu, alpha1, alpha2, tau)
-        first_response_time[i] = rt1
-        correct[i] = corr
-        double_flag[i] = dbl
-        second_response_time[i] = rt2
+    correct = np.where(t0 < t1, 0.0, 1.0)
+    first_response_time = np.minimum(t0, t1) + tau
+    loser_drift = np.where(t0 < t1, nu[1], nu[0])
+
+    t2 = race_to_threshold(loser_drift, alpha2, n)
+    double_flag = (t2 < MAX_T).astype(float)
+    second_response_time = np.where(double_flag == 1.0, t2 + tau, 0.0)
 
     return {
         "first_response_time": first_response_time,
@@ -86,3 +67,14 @@ def simulate_dataset(nu, alpha1, alpha2, tau, n=N_TRIALS):
         "double_flag": double_flag,
         "second_response_time": second_response_time,
     }
+
+
+def trial(nu, alpha1, alpha2, tau):
+    """Single-trial version, kept for compatibility with earlier tests."""
+    data = simulate_dataset(nu, alpha1, alpha2, tau, n=1)
+    return (
+        data["first_response_time"][0],
+        data["correct"][0],
+        data["double_flag"][0],
+        data["second_response_time"][0],
+    )
