@@ -221,3 +221,4 @@ __marimo__/
 data/*
 !data/.gitkeep
 results/
+!results/trained_model.keras
