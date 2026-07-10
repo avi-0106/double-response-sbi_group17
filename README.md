@@ -19,6 +19,7 @@
 ```
 
 ### Every time you want to work
+Make sure you open the DOCKER application in your system
 ```bash
 cd docker
 docker compose up --build
