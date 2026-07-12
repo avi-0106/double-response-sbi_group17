@@ -1,5 +1,5 @@
 """
-Combines context, prior, and simulate_dataset into one BayesFlow
+Combines context, prior, and simulator into one BayesFlow
 simulator object - this is what actually gets used for training.
 """
 

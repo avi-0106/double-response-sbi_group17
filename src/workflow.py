@@ -12,7 +12,7 @@ workflow = bf.BasicWorkflow(
     adapter=adapter,
     inference_network=bf.networks.CouplingFlow(),
     summary_network=bf.networks.DeepSet(),
-    inference_variables=["nu", "alpha1", "alpha2", "tau"],
+    inference_variables=["nu", "alpha1", "tau"],
     inference_conditions=["n"],
     summary_variables=["first_response_time", "correct", "double_flag", "second_response_time"],
 )

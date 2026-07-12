@@ -9,18 +9,14 @@ priors:
   nu:
     distribution: gamma
     shape: 5
-    scale: 0.5      # drift rates, avg around 2.5
+    scale: 0.5
   alpha1:
     distribution: gamma
     shape: 5
-    scale: 0.2      # first threshold, avg around 1.0
-  alpha2_gap:
-    distribution: gamma
-    time_scale: 6.0
-    time_shape: 5
+    scale: 0.2
   tau:
     distribution: exponential
-    scale: 0.15     # non-decision time, avg 0.15s
+    scale: 0.15
 
 paths:
   data_dir: ../data
