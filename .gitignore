@@ -222,3 +222,4 @@ data/*
 !data/.gitkeep
 results/*
 !results/trained_model.keras
+!results/trained_model_v2.keras
