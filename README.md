@@ -1,3 +1,7 @@
+## About this project:
+
+Evans, N. J., Dutilh, G., Wagenmakers, E.-J., & van der Maas, H. L. (2020). Double responding: A new constraint for models of speeded decision making. *Cognitive Psychology*, *121*, 101292. https://doi.org/10.1016/j.cogpsych.2020.101292
+
 ## Running the Project (Docker)
 
 ### First-time setup
