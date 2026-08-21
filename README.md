@@ -67,10 +67,6 @@ docker compose down
 │   │   ├── calibration_check.ipynb
 │   │   └── corrected_model_check.ipynb
 │   └── final/
-│       ├── .ipynb_checkpoints/
-│       │   ├── experiment-checkpoint.ipynb 
-│       │   ├── full_project-checkpoint.ipynb
-│       │   └── full_project_task8-checkpoint.ipynb
 │       ├── double_response_rdm.ipynb # main notebook file
 │       ├── history_backup.json
 │       ├── loss_curve.png
