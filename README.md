@@ -88,3 +88,8 @@ docker compose down
 │   └── workflow.py
 └── TODO.md
 ```
+## 📄 Analysis and Simulation Report
+
+The complete report for our analysis and simulation is available here:
+
+**[View the Analysis and Simulation Report (PDF)](report/Report.pdf)**
