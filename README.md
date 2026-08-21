@@ -68,7 +68,7 @@ docker compose down
 │   │   └── corrected_model_check.ipynb
 │   └── final/
 │       ├── .ipynb_checkpoints/
-│       │   ├── experiment-checkpoint.ipynb
+│       │   ├── experiment-checkpoint.ipynb #main notebook file
 │       │   ├── full_project-checkpoint.ipynb
 │       │   └── full_project_task8-checkpoint.ipynb
 │       ├── double_response_rdm.ipynb
@@ -78,7 +78,7 @@ docker compose down
 │       └── simulated_data.csv
 ├── README.md
 ├── report/
-│   └── Report.pdf
+│   └── Report.pdf #main report
 ├── requirements.txt
 ├── results/
 │   ├── trained_model.keras
