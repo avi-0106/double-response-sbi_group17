@@ -45,7 +45,6 @@ docker compose down
 ```
 ├── .dockerignore
 ├── .env
-├── .git/
 ├── .gitignore
 ├── .Trash-0/
 │   ├── files/
