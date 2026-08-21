@@ -39,3 +39,57 @@ You don't need VS Code for any of this. Inside JupyterLab you can edit files, ru
 ```bash
 docker compose down
 ```
+
+## Project File Structure
+
+```
+├── .dockerignore
+├── .env
+├── .git/
+├── .gitignore
+├── .Trash-0/
+│   ├── files/
+│   │   ├── pipeline_walkthrough.ipynb
+│   │   ├── using_the_trained_model 1.ipynb
+│   │   └── using_the_trained_model.ipynb
+│   └── info/
+│       ├── pipeline_walkthrough.ipynb.trashinfo
+│       ├── using_the_trained_model 1.ipynb.trashinfo
+│       └── using_the_trained_model.ipynb.trashinfo
+├── data/
+│   └── .gitkeep
+├── docker/
+│   ├── docker-compose.yml
+│   └── Dockerfile
+├── LICENSE
+├── notebooks/
+│   ├── exploration/
+│   │   ├── calibration_check.ipynb
+│   │   └── corrected_model_check.ipynb
+│   └── final/
+│       ├── .ipynb_checkpoints/
+│       │   ├── experiment-checkpoint.ipynb
+│       │   ├── full_project-checkpoint.ipynb
+│       │   └── full_project_task8-checkpoint.ipynb
+│       ├── double_response_rdm.ipynb
+│       ├── history_backup.json
+│       ├── loss_curve.png
+│       ├── posterior_pair_plot.png
+│       └── simulated_data.csv
+├── README.md
+├── report/
+│   └── Report.pdf
+├── requirements.txt
+├── results/
+│   ├── trained_model.keras
+│   └── trained_model_v2.keras
+├── src/
+│   ├── adapter.py
+│   ├── bf_simulator.py
+│   ├── config.yml
+│   ├── load_model.py
+│   ├── priors.py
+│   ├── simulator.py
+│   └── workflow.py
+└── TODO.md
+```
