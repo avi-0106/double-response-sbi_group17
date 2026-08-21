@@ -68,10 +68,10 @@ docker compose down
 │   │   └── corrected_model_check.ipynb
 │   └── final/
 │       ├── .ipynb_checkpoints/
-│       │   ├── experiment-checkpoint.ipynb #main notebook file
+│       │   ├── experiment-checkpoint.ipynb 
 │       │   ├── full_project-checkpoint.ipynb
 │       │   └── full_project_task8-checkpoint.ipynb
-│       ├── double_response_rdm.ipynb
+│       ├── double_response_rdm.ipynb # main notebook file
 │       ├── history_backup.json
 │       ├── loss_curve.png
 │       ├── posterior_pair_plot.png
