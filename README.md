@@ -8,6 +8,12 @@ The complete report for our analysis and simulation is available here:
 
 **[View the Analysis and Simulation Report (PDF)](report/Report.pdf)**
 
+## Notebook
+
+The complete Notebook is available here:
+
+**[View the Notebook](notebooks/final/double_response_rdm.ipynb)**
+
 ## Running the Project (Docker)
 
 ### First-time setup
@@ -52,15 +58,6 @@ docker compose down
 ├── .dockerignore
 ├── .env
 ├── .gitignore
-├── .Trash-0/
-│   ├── files/
-│   │   ├── pipeline_walkthrough.ipynb
-│   │   ├── using_the_trained_model 1.ipynb
-│   │   └── using_the_trained_model.ipynb
-│   └── info/
-│       ├── pipeline_walkthrough.ipynb.trashinfo
-│       ├── using_the_trained_model 1.ipynb.trashinfo
-│       └── using_the_trained_model.ipynb.trashinfo
 ├── data/
 │   └── .gitkeep
 ├── docker/
@@ -84,14 +81,13 @@ docker compose down
 ├── results/
 │   ├── trained_model.keras
 │   └── trained_model_v2.keras
-├── src/
-│   ├── adapter.py
-│   ├── bf_simulator.py
-│   ├── config.yml
-│   ├── load_model.py
-│   ├── priors.py
-│   ├── simulator.py
-│   └── workflow.py
-└── TODO.md
+└── src/
+    ├── adapter.py
+    ├── bf_simulator.py
+    ├── config.yml
+    ├── load_model.py
+    ├── priors.py
+    ├── simulator.py
+    └── workflow.p
 ```
 
